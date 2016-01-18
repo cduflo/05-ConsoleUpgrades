@@ -1,0 +1,32 @@
+﻿<Window x:Class="ConsoleUpgrades.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ConsoleUpgrades"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="381" Width="234.5">
+    <Grid Background="White" Margin="10,0,2,4">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="104" Margin="0,96,0,0" VerticalAlignment="Top" Width="197">
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="129" Margin="-1,114,-1,-151" VerticalAlignment="Top" Width="197"/>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="77" VerticalAlignment="Top" Width="196" Margin="1,8,0,0"/>
+        <TextBox x:Name="textBoxCost" HorizontalAlignment="Left" Height="26" Margin="112,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" TextChanged="textBoxCost_TextChanged"/>
+        <Button x:Name="button" Content="Add Item" HorizontalAlignment="Left" Margin="9,47,0,0" VerticalAlignment="Top" Width="178" Height="26" Click="button_Click"/>
+        <Label x:Name="label" Content="Item Cost" HorizontalAlignment="Left" Margin="9,16,0,0" VerticalAlignment="Top" Width="98" Height="26"/>
+        <Label x:Name="label1" Content="Total: " HorizontalAlignment="Left" Margin="1,104,0,0" VerticalAlignment="Top" Width="98" Height="26"/>
+        <TextBlock x:Name="textBlockTotal" HorizontalAlignment="Left" Margin="113,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="75"/>
+        <TextBlock x:Name="textBlockChange" HorizontalAlignment="Left" Margin="12,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="105" Width="174"/>
+        <Label x:Name="label2" Content="Cash Tendered" HorizontalAlignment="Left" Margin="1,135,0,0" VerticalAlignment="Top" Width="98" Height="26"/>
+        <TextBox x:Name="textBoxTender" HorizontalAlignment="Left" Height="23" Margin="112,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" TextChanged="textBoxTender_TextChanged"/>
+        <Button x:Name="Calculate" Content="Calculate Change" HorizontalAlignment="Left" Margin="9,168,0,0" VerticalAlignment="Top" Width="178" Click="Calculate_Click" Height="23"/>
+
+    </Grid>
+</Window>
