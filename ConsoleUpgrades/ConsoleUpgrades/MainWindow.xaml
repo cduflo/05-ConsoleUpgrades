@@ -5,7 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConsoleUpgrades"
         mc:Ignorable="d"
-        Title="MainWindow" Height="381" Width="234.5">
+        Title="MainWindow" Height="451" Width="234.5" Style="{DynamicResource WindowStyle1}">
+    <Window.Resources>
+        <ControlTemplate x:Key="WindowTemplateKey" TargetType="{x:Type Window}">
+            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                <Grid>
+                    <AdornerDecorator>
+                        <ContentPresenter/>
+                    </AdornerDecorator>
+                    <ResizeGrip x:Name="WindowResizeGrip" HorizontalAlignment="Right" IsTabStop="false" Visibility="Collapsed" VerticalAlignment="Bottom"/>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="ResizeMode" Value="CanResizeWithGrip"/>
+                        <Condition Property="WindowState" Value="Normal"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Visibility" TargetName="WindowResizeGrip" Value="Visible"/>
+                </MultiTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="WindowStyle1" TargetType="{x:Type Window}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                            <AdornerDecorator>
+                                <ContentPresenter/>
+                            </AdornerDecorator>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                    <Setter Property="Template" Value="{StaticResource WindowTemplateKey}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid Background="White" Margin="10,0,2,4">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -14,7 +55,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="104" Margin="0,96,0,0" VerticalAlignment="Top" Width="197">
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="129" Margin="-1,114,-1,-151" VerticalAlignment="Top" Width="197"/>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="188" Margin="-1,114,-1,-200" VerticalAlignment="Top" Width="197"/>
         </Border>
 
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="77" VerticalAlignment="Top" Width="196" Margin="1,8,0,0"/>
@@ -23,7 +64,7 @@
         <Label x:Name="label" Content="Item Cost" HorizontalAlignment="Left" Margin="9,16,0,0" VerticalAlignment="Top" Width="98" Height="26"/>
         <Label x:Name="label1" Content="Total: " HorizontalAlignment="Left" Margin="1,104,0,0" VerticalAlignment="Top" Width="98" Height="26"/>
         <TextBlock x:Name="textBlockTotal" HorizontalAlignment="Left" Margin="113,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="75"/>
-        <TextBlock x:Name="textBlockChange" HorizontalAlignment="Left" Margin="12,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="105" Width="174"/>
+        <TextBlock x:Name="textBlockChange" HorizontalAlignment="Left" Margin="9,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="172" Width="174"/>
         <Label x:Name="label2" Content="Cash Tendered" HorizontalAlignment="Left" Margin="1,135,0,0" VerticalAlignment="Top" Width="98" Height="26"/>
         <TextBox x:Name="textBoxTender" HorizontalAlignment="Left" Height="23" Margin="112,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" TextChanged="textBoxTender_TextChanged"/>
         <Button x:Name="Calculate" Content="Calculate Change" HorizontalAlignment="Left" Margin="9,168,0,0" VerticalAlignment="Top" Width="178" Click="Calculate_Click" Height="23"/>

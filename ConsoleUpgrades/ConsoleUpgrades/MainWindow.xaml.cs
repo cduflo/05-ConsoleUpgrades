@@ -25,20 +25,18 @@ namespace ConsoleUpgrades
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = this;
         }
 
         //Define Global Variables for holding total and calculating change
         public static decimal total = 0;
         public static decimal tendered = 0;
         public static decimal change = 0;
-        
 
+        //Define class and properties for use in calculation
         class Money
         {
             public decimal amount { get; set; }
             public string print { get; set; }
-
         }
 
         List<Money> changeMoney = new List<Money>
@@ -55,6 +53,7 @@ namespace ConsoleUpgrades
                 new Money { amount = .01M, print = "Pennies: " }
                 };
 
+        //Methods to capture and validate user input
         public void getItemCost()
         {
             try
@@ -80,9 +79,9 @@ namespace ConsoleUpgrades
             catch (Exception)
             {
                 MessageBox.Show("Error: Please enter a valid amount in this format: '15.90'");
+                tendered = 0;
             }
         }
-
 
         public void button_Click(object sender, RoutedEventArgs e)
         {
@@ -91,18 +90,16 @@ namespace ConsoleUpgrades
             textBoxCost.Text = "";
         }
 
-        private void textBoxCost_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void Calculate_Click(object sender, RoutedEventArgs e)
         {
+            //Update Tendered Variable
+            getTendered();
+
             //Set variable for change calculation
             change = tendered - total;
 
             //Set basis for message:
-            string message = "The customer's change is: $" + change + ".";
+            string message = "The customer's change is: $" + change + ".\n";
 
             //Set variable for reducing change amount in following loop
             decimal remaining = change;
@@ -120,13 +117,34 @@ namespace ConsoleUpgrades
             }
 
             //Print message
-            textBlockChange.Text = message;
-            MessageBox.Show(message);
+            if (total == 0)
+            {
+                MessageBox.Show("No items have been added to the total.");
+                textBlockChange.Text = "";
+            }
+            else if (tendered == 0)
+            {
+                textBlockChange.Text = "";
+            }
+            else if (tendered < total)
+            {
+                MessageBox.Show("The customer has presented insufficient funds for their purchase.");
+            }
+            else
+            {
+                textBlockChange.Text = message;
+            }
+        }
+
+
+        private void textBoxCost_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
 
         private void textBoxTender_TextChanged(object sender, TextChangedEventArgs e)
         {
-            getTendered();
+
         }
     }
 }
